@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include "myDate.h"
+#include<iomanip>
 using namespace std;
 
 
@@ -12,6 +13,7 @@ struct Movie {
         myDate release;
         const char *actor;
 };
+void MovDisplay(Movie *m[]);
 void populate (Movie *m[]);
 void sortByName(Movie *m[]);
 void sortByAct (Movie *m[]);
@@ -20,23 +22,71 @@ void sortByRunTime (Movie *m[]);
 void sortByDate (Movie *m[]);
 
 
-void Menu(int a){
-    cout << "1. Sort by Movie";
+void action(){
+
+    cout << "\n1. Sort by Movie title\n";
+    cout << "2. Sort by Running Time\n";
+    cout << "3. Sort by IMDB rating\n";
+    cout << "4. Sort by release date\n";
+    cout << "5. Sort by Main Actor Name\n";
+    cout << "6. Exit\n";
 }
 
-int main() {
 
+int main() {
+    int choice =0;
     struct Movie *DVD[10];
     populate (DVD);
-    //sortByName(DVD);
+    while (choice != 6){
+        action();
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                sortByName(DVD);
+                break;
+            case 2:
+                sortByRunTime(DVD);
+                break;
+            case 3:
+                sortByRating(DVD);
+                break;
+            case 4:
+                sortByDate(DVD);
+                break;
+            case 5:
+                sortByAct(DVD);
+                break;
+            case 6:
+                cout << "\n\n -- Hope you have a great day! -- \n\n";
+                return 0;
+        }
+        MovDisplay(DVD);
+    }
+
     //sortByAct(DVD);
-    //sortByRating(DVD);
-    //sortByRunTime(DVD);
-    sortByDate(DVD);
+
+    MovDisplay(DVD);
 
 
 
     return 0;
+}
+
+void MovDisplay(Movie *m[])
+{
+    cout <<setw(15)<<left<< "Name\t\t\tRunning Time\tIMDB\tRelease Date\t\tMain Actor\n";
+    for (int i = 0; i < 9; ++i) {
+
+        int totalMin = m[i]->runTime;
+        double hour = totalMin/60;
+        double min  = totalMin%60;
+
+        cout <<setw(15)<<left<< m[i]->name <<" ";
+        cout <<left<< hour << "Hour "<< min <<"Min\t\t";
+        cout <<left<< m[i]->rating <<"\t\t";
+        m[i]->release.display();
+        cout <<setw(5)<<"\t"<< m[i]->actor << "\n";
+    }
 }
 
 void sortByName (Movie *m[])

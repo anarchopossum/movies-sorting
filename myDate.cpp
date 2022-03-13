@@ -5,6 +5,7 @@
 */
 #include <iostream>
 #include <string>
+#include<iomanip>
 #include <math.h>
 using namespace std;
 #include "myDate.h"
@@ -91,7 +92,7 @@ void myDate::display(){
             monthName = "Error";
             break;
     }
-    cout << monthName << " " << day << ", " << year<<" ";
+    cout <<left<< monthName << " " << day << ", " << year;
 }
 
 // Date increments and decrements
