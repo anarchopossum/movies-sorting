@@ -19,7 +19,6 @@ struct Movie {
         myDate release;
         const char *actor;
 };
-string displayr();
 void MovDisplay(Movie *m[]);
 void populate (Movie *m[]);
 void sortByName(Movie *m[]);
@@ -130,7 +129,7 @@ void MovDisplay(Movie *m[])
 {
     cout <<endl;
     cout <<setw(15)<<left<< "Name\t\t\tRunning Time\tIMDB\tRelease Date\t\tMain Actor\n";
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < 10; ++i) {
 
         int totalMin = m[i]->runTime;
         double hour = totalMin/60;
