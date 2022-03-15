@@ -92,7 +92,7 @@ void myDate::display(){
             monthName = "Error";
             break;
     }
-    cout <<left<< monthName << " " << day << ", " << year;
+    cout << monthName << " " << day << ", " << year;
 }
 
 // Date increments and decrements

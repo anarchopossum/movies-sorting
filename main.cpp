@@ -1,3 +1,9 @@
+/*
+* Created By: Jasmine San Juan
+* Movies Project CECS 282 Spring 2022
+* Prof. Gold
+*/
+
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -13,6 +19,7 @@ struct Movie {
         myDate release;
         const char *actor;
 };
+string displayr();
 void MovDisplay(Movie *m[]);
 void populate (Movie *m[]);
 void sortByName(Movie *m[]);
@@ -24,12 +31,14 @@ void sortByDate (Movie *m[]);
 
 void action(){
 
-    cout << "\n1. Sort by Movie title\n";
-    cout << "2. Sort by Running Time\n";
-    cout << "3. Sort by IMDB rating\n";
-    cout << "4. Sort by release date\n";
-    cout << "5. Sort by Main Actor Name\n";
-    cout << "6. Exit\n";
+    cout << "\n+======= Movie Sorter =======+ ";
+    cout << "\n|1. Sort by Movie title      |\n";
+    cout << "|2. Sort by Running Time     |\n";
+    cout << "|3. Sort by IMDB rating      |\n";
+    cout << "|4. Sort by release date     |\n";
+    cout << "|5. Sort by Main Actor Name  |\n";
+    cout << "|6. Exit                     |\n";
+    cout << "+============================+ \n";
 }
 
 
@@ -71,9 +80,55 @@ int main() {
 
     return 0;
 }
+string dateDisp(myDate date){
+    string monthName;
+    switch (date.getMonth()) {
+        case 1:
+            monthName = "January";
+            break;
+        case 2:
+            monthName = "February";
+            break;
+        case 3:
+            monthName = "March";
+            break;
+        case 4:
+            monthName = "April";
+            break;
+        case 5:
+            monthName = "May";
+            break;
+        case 6:
+            monthName = "June";
+            break;
+        case 7:
+            monthName = "July";
+            break;
+        case 8:
+            monthName = "August";
+            break;
+        case 9:
+            monthName = "September";
+            break;
+        case 10:
+            monthName = "October";
+            break;
+        case 11:
+            monthName = "November";
+            break;
+        case 12:
+            monthName = "December";
+            break;
+        default:
+            monthName = "Error";
+            break;
+    }
+    return monthName + " " + to_string(date.getDay()) + ", " + to_string(date.getYear());
 
+}
 void MovDisplay(Movie *m[])
 {
+    cout <<endl;
     cout <<setw(15)<<left<< "Name\t\t\tRunning Time\tIMDB\tRelease Date\t\tMain Actor\n";
     for (int i = 0; i < 9; ++i) {
 
@@ -81,11 +136,8 @@ void MovDisplay(Movie *m[])
         double hour = totalMin/60;
         double min  = totalMin%60;
 
-        cout <<setw(15)<<left<< m[i]->name <<" ";
-        cout <<left<< hour << "Hour "<< min <<"Min\t\t";
-        cout <<left<< m[i]->rating <<"\t\t";
-        m[i]->release.display();
-        cout <<setw(5)<<"\t"<< m[i]->actor << "\n";
+        cout <<setw(15)<<left<< m[i]->name <<" "<< hour << "Hour "<< min <<"Min\t\t"<< m[i]->rating <<"\t\t";
+        cout <<setw(20)<<left<<dateDisp(m[i]->release)<<m[i]->actor << "\n";
     }
 }
 
